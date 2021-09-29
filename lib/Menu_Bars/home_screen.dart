@@ -1,5 +1,5 @@
 import 'package:cs4750_mobileapp/Menu_Bars/Friends_Screen.dart';
-import 'package:cs4750_mobileapp/Menu_Bars/QRScan_screen.dart';
+import 'package:cs4750_mobileapp/Menu_Bars/QRScan_Screen.dart';
 import 'package:cs4750_mobileapp/Menu_Bars/Settings.dart';
 import 'package:cs4750_mobileapp/constants/color_constants.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +19,12 @@ class _UserProfilePageState extends State<UserProfilePage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    UserCardsPage(),
+    UsersCardsPage(),
     QRScanPage(),
     FriendsPage(),
     SettingsPage(),
   ];
+
 
   @override
   Widget build(BuildContext context) {

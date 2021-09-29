@@ -6,14 +6,18 @@ class FriendsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
+        body: Stack(
           children: [
-            Expanded(
-              flex: 20,
-              child: Image(
-                  image: AssetImage('assets/LPL_logo.png'),
-                  color: Color.fromRGBO(255,0,0,0.19),
-              ),
+            Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage (
+                      image: AssetImage('assets/LPL_logo.png'),
+                      fit: BoxFit.contain,
+                    )
+                )
+            ),
+            Container(
+              color: Color.fromRGBO(255,255,255,0.7),
             ),
           ],
         )

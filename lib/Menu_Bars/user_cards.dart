@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 
-class UserCardsPage extends StatelessWidget {
-  const UserCardsPage({Key? key}) : super(key: key);
+class UsersCardsPage extends StatelessWidget {
+  const UsersCardsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
+        body: Stack(
           children: [
             Container(
-              child: Expanded(
-                flex: 20,
-                child: Image(
-                  image: AssetImage('assets/LPL_logo.png'),
-                  color: Color.fromRGBO(255,0,0,0.19),
-                ),
-              ),
+                decoration: BoxDecoration(
+                    image: DecorationImage (
+                      image: AssetImage('assets/LPL_logo.png'),
+                      fit: BoxFit.contain,
+                    )
+                )
             ),
-
+            Container(
+              color: Color.fromRGBO(255,255,255,0.7),
+            ),
           ],
-        ));
+        )
+    );
   }
 }

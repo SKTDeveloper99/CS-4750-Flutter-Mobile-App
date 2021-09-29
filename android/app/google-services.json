@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "869897771504",
+    "project_id": "lpl-card-app",
+    "storage_bucket": "lpl-card-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869897771504:android:a8c5b49526bd6445652535",
+        "android_client_info": {
+          "package_name": "com.edu.cpp.CS4750.cs4750_mobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869897771504-uia066nuojfhmakp9t18cet2aseln5cc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9di1M91VNxQXAz76hg4NGgcXhauai42I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869897771504-uia066nuojfhmakp9t18cet2aseln5cc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
