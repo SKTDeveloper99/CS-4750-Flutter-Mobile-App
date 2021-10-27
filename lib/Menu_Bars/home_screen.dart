@@ -17,7 +17,7 @@ class UserProfilePage extends StatefulWidget {
 class _UserProfilePageState extends State<UserProfilePage> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     UsersCardsPage(),
     QRScanPage(),
@@ -35,7 +35,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
             backgroundImage:
-            NetworkImage("https://placeimg.com/640/480/people"),
+            NetworkImage("https://picsum.photos/250?image=9"),
             //onPressed: () {},
           ),
         ),

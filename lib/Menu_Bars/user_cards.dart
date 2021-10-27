@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
-class UsersCardsPage extends StatelessWidget {
-  const UsersCardsPage({Key? key}) : super(key: key);
+class UsersCardsPage extends StatefulWidget {
+  @override
+  State<UsersCardsPage> createState() => _UsersCardsPageState();
+}
+
+class _UsersCardsPageState extends State<UsersCardsPage> {
+  //firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
+  FirebaseStorage storage = FirebaseStorage.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -24,3 +31,7 @@ class UsersCardsPage extends StatelessWidget {
     );
   }
 }
+
+
+
+

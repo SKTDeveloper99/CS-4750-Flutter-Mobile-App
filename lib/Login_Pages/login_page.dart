@@ -1,15 +1,21 @@
 import 'package:cs4750_mobileapp/Menu_Bars/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'forgot_password.dart';
 import 'sign_up.dart';
 
 class LoginPage extends StatefulWidget {
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,10 +45,11 @@ class _LoginPageState extends State<LoginPage> {
                   margin:
                   EdgeInsets.only(left: 35, right: 35, top: 10, bottom: 10),
                   child: TextField(
+                    controller: emailController,
                     obscureText: false,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Username',
+                      labelText: 'Email',
                     ),
                   ),
                 ),
@@ -50,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                   margin:
                   EdgeInsets.only(left: 35, right: 35, top: 10, bottom: 10),
                   child: TextField(
+                    controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -85,10 +93,18 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       child: Text('Login'),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => UserProfilePage()),
-                        );
+                        FirebaseAuth.instance.signInWithEmailAndPassword(
+                            email: emailController.text, password: passwordController.text)
+                            .then((value){
+                          print("Successfully Logged in!");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => UserProfilePage()),
+                          );
+                        }).catchError((error){
+                          print("Failed to log in!");
+                          print(error.toString());
+                        });
                       }
                   ),
                 ),

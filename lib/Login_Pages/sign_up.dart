@@ -1,6 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatelessWidget {
+
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,10 +30,11 @@ class SignUpPage extends StatelessWidget {
                   margin:
                   EdgeInsets.only(left: 35, right: 35, top: 16, bottom: 10),
                   child: TextField(
+                    controller: emailController,
                     obscureText: false,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Username',
+                      labelText: 'Email',
                     ),
                   ),
                 ),
@@ -36,6 +42,7 @@ class SignUpPage extends StatelessWidget {
                   margin:
                   EdgeInsets.only(left: 35, right: 35, top: 10, bottom: 10),
                   child: TextField(
+                    controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -52,9 +59,21 @@ class SignUpPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50),
                         side: BorderSide(color: Colors.red),
                       ),
-                      child: Text('Login'),
+                      child: Text("Let's Go!"),
                       onPressed: () {
-
+                        // get the email and password typed
+                        print(emailController.text);
+                        print(passwordController.text);
+                        // deliver the materials to Google Firebase
+                        FirebaseAuth.instance.createUserWithEmailAndPassword(
+                            email: emailController.text, password: passwordController.text)
+                        .then((value){
+                          print("Successfully signed up!");
+                          Navigator.pop(context);
+                        }).catchError((error){
+                          print("Failed to sign up!");
+                          print(error.toString());
+                        });
                       }
                   ),
                 ),
