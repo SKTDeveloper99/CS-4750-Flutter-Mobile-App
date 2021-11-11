@@ -53,6 +53,3 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 }
 
-Future<void> _signOut() async {
-  await FirebaseAuth.instance.signOut();
-}

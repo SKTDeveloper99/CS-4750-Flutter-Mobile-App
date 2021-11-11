@@ -2,6 +2,8 @@ import 'package:cs4750_mobileapp/Menu_Bars/Friends_Screen.dart';
 import 'package:cs4750_mobileapp/Menu_Bars/QRScan_Screen.dart';
 import 'package:cs4750_mobileapp/Menu_Bars/Settings.dart';
 import 'package:cs4750_mobileapp/constants/color_constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:cs4750_mobileapp/Menu_Bars/user_profile.dart';
 import 'package:cs4750_mobileapp/Menu_Bars/user_cards.dart';
@@ -16,6 +18,31 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   int _selectedIndex = 0;
+  var userProfile;
+
+  @override
+  void initState() {
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        var uid = user.uid;
+        FirebaseDatabase.instance.reference().child("users/" + uid).once()
+            .then((ds) {
+          print(ds.value);
+          userProfile = ds.value;
+          setState(() {
+
+          });
+        }).catchError((error) {
+          print("Failed to retrieve user's information");
+        }
+        );
+      }
+    });
+
+    super.initState();
+  }
 
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
@@ -34,8 +61,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
-            backgroundImage:
-            NetworkImage("https://picsum.photos/250?image=9"),
+            backgroundImage: NetworkImage(
+              userProfile['profilePic'] == null ? "https://img.redbull.com/images/c_limit,w_1500,h_1000,f_auto,q_auto/redbullcom/2020/12/16/c61kpj1fxidgnwiqgz2h/faker-t1-main" : userProfile['profilePic']
+          ),
             //onPressed: () {},
           ),
         ),

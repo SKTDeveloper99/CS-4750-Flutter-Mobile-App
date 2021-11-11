@@ -39,17 +39,13 @@ class ForgotPassWordPage extends StatelessWidget {
                 margin: EdgeInsets.only(top: 30, bottom: 20),
                 width: 200,
                 height: 40,
-                child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                      side: BorderSide(color: Colors.red),
-                    ),
+                child: ElevatedButton(
                     child: Text('Reclaim account'),
                     onPressed: () {
 
                     }
+                    ),
                 ),
-              ),
             ],
           ),
         ),
