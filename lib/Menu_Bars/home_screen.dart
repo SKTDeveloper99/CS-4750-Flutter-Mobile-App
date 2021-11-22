@@ -18,7 +18,11 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   int _selectedIndex = 0;
-  var userProfile;
+  var userProfile ;
+  var profilePic;
+  var username;
+  var location;
+  var description;
 
   @override
   void initState() {
@@ -32,7 +36,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
           print(ds.value);
           userProfile = ds.value;
           setState(() {
-
+            profilePic = userProfile["profilePic"];
+            location = userProfile["location"];
+            description = userProfile["description"];
           });
         }).catchError((error) {
           print("Failed to retrieve user's information");
@@ -44,7 +50,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     super.initState();
   }
 
-  static List<Widget> _widgetOptions = <Widget>[
+  static var _widgetOptions = <Widget>[
     HomeScreen(),
     UsersCardsPage(),
     QRScanPage(),
@@ -62,8 +68,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
             backgroundImage: NetworkImage(
-              userProfile['profilePic'] == null ? "https://img.redbull.com/images/c_limit,w_1500,h_1000,f_auto,q_auto/redbullcom/2020/12/16/c61kpj1fxidgnwiqgz2h/faker-t1-main" : userProfile['profilePic']
-          ),
+                profilePic == null ? "https://img.redbull.com/images/c_limit,w_1500,h_1000,f_auto,q_auto/redbullcom/2020/12/16/c61kpj1fxidgnwiqgz2h/faker-t1-main" : profilePic
+            ),
             //onPressed: () {},
           ),
         ),

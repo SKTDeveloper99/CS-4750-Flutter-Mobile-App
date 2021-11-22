@@ -72,7 +72,9 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             // Attempt to take a picture and get the file `image`
             // where it was saved.
             final image = await _controller.takePicture();
-
+            if (!mounted) {
+              return;
+            }
             // If the picture was taken, display it on a new screen.
             final result = await Navigator.of(context).push(
               MaterialPageRoute(
@@ -114,31 +116,33 @@ class DisplayPictureScreen extends StatelessWidget {
       ),
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image.
-      body: Column(
-        children: [
-          Image.file(File(imagePath)),
-          Text('${imagePath}'),
-          ElevatedButton(
-            child: Text('Upload'),
-            onPressed: () {
-              var fileToUpload = File(imagePath);
-              var fileName = "profile-" + DateTime.now().millisecondsSinceEpoch.toString()+ ".png";
-              FirebaseStorage.instance.ref().child("ProfilePictures/" + fileName).putFile(fileToUpload).snapshotEvents.listen((TaskSnapshot event){
-                print("Uploading events: " + event.state.toString());
-                if(event.state == TaskState.success) {
-                  FirebaseStorage.instance.ref().child("ProfilePictures/" + fileName).getDownloadURL()
-                      .then((value) {
-                        print("URL: " + value.toString());
-                        Navigator.pop(context, value.toString());
-                  }).catchError((error){
-                        print("Failure to obtain the URL");
-                  });
-                }
-              });
-            },
+      body: SingleChildScrollView(
+        child: Column (
+          children: [
+            Image.file(File(imagePath)),
+            //Text('$imagePath'),
+            ElevatedButton(
+              child: Text('Upload'),
+              onPressed: () {
+                var fileToUpload = File(imagePath);
+                var fileName = "profile-" + DateTime.now().millisecondsSinceEpoch.toString()+ ".png";
+                FirebaseStorage.instance.ref().child("ProfilePictures/" + fileName).putFile(fileToUpload).snapshotEvents.listen((TaskSnapshot event){
+                  print("Uploading events: " + event.state.toString());
+                  if(event.state == TaskState.success) {
+                    FirebaseStorage.instance.ref().child("ProfilePictures/" + fileName).getDownloadURL()
+                        .then((value) {
+                      print("URL: " + value.toString());
+                      Navigator.pop(context, value.toString());
+                    }).catchError((error){
+                      print("Failure to obtain the URL");
+                    });
+                  }
+                });
+              },
 
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

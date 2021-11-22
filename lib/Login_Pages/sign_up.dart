@@ -8,6 +8,10 @@ class SignUpPage extends StatelessWidget {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var usernameController =  TextEditingController();
+  var cardHaving = TextEditingController();
+  String locationController = "";
+  String descriptionController = "";
+  String profilePicController = "";
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +90,9 @@ class SignUpPage extends StatelessWidget {
                               'email': emailController.text,
                               'password': passwordController.text,
                               'username': usernameController.text,
+                              'location': "Summoner's Rift",
+                              'description': "Love League too much, but hate it much more",
+                              'profilePic': "https://img.redbull.com/images/c_limit,w_1500,h_1000,f_auto,q_auto/redbullcom/2020/12/16/c61kpj1fxidgnwiqgz2h/faker-t1-main",
                             };
 
                             FirebaseDatabase.instance.reference().child("users/" + authResult.user!.uid)

@@ -41,7 +41,9 @@ class _SettingsPageState extends State<SettingsPage> {
               height: 48,
               padding: const EdgeInsets.symmetric(vertical: 4.0),
               alignment: Alignment.center,
-              child: const CircleAvatar(),
+              child: const CircleAvatar(
+                backgroundImage: AssetImage('assets/LPL_logo.png'),
+              ),
             ),
           ),
           title: const Text('Log Out'),

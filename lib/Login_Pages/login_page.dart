@@ -16,16 +16,15 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            flex: 20,
-            child: Image(image: AssetImage('assets/LPL_logo.png')),
-          ),
-          Expanded(
-            flex: 60,
+        body: Center(
+          child: SingleChildScrollView (
             child: Column(
-              children: [
+              children: <Widget> [
+                Container(
+                  child: Container(
+                      child: Image.asset('assets/LPL_logo.png',scale: 2)
+                  ),
+                ),
                 Container(
                   margin: EdgeInsets.only(top: 20, bottom: 20),
                   child: Text(
@@ -38,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Container(
                   margin:
-                      EdgeInsets.only(left: 35, right: 35, top: 10, bottom: 10),
+                  EdgeInsets.only(left: 35, right: 35, top: 10, bottom: 10),
                   child: TextField(
                     controller: emailController,
                     obscureText: false,
@@ -50,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Container(
                   margin:
-                      EdgeInsets.only(left: 35, right: 35, top: 10, bottom: 10),
+                  EdgeInsets.only(left: 35, right: 35, top: 10, bottom: 10),
                   child: TextField(
                     controller: passwordController,
                     obscureText: true,
@@ -80,26 +79,26 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   margin: EdgeInsets.only(top: 30, bottom: 20),
                   width: 200,
-                    child: ElevatedButton(
-                        child: Text('Log In'),
-                        onPressed: () {
-                          FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
-                              email: emailController.text,
-                              password: passwordController.text)
-                              .then((value) {
-                            print("Successfully Logged in!");
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => UserProfilePage()),
-                            );
-                          }).catchError((error) {
-                            print("Failed to log in!");
-                            print(error.toString());
-                          });
-                        }
-                    ),
+                  child: ElevatedButton(
+                      child: Text('Log In'),
+                      onPressed: () {
+                        FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text)
+                            .then((value) {
+                          print("Successfully Logged in!");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => UserProfilePage()),
+                          );
+                        }).catchError((error) {
+                          print("Failed to log in!");
+                          print(error.toString());
+                        });
+                      }
+                  ),
                 ),
                 Container(
                   child: new GestureDetector(
@@ -120,8 +119,11 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-        ],
-      ),
+        )
     );
   }
 }
+
+
+
+
